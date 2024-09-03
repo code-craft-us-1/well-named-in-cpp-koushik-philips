@@ -1,11 +1,6 @@
 #include "StdAfx.h"
-#pragma warning (disable : 4091)
+#include "ColorPair.h"
 
-namespace TelCoColorCoder
-{
-    enum MajorColor { WHITE, RED, BLACK, YELLOW, VIOLET };
-    enum MinorColor { BLUE, ORANGE, GREEN, BROWN, SLATE };
-}
 extern void testNumberToPair(int pairNumber,
     TelCoColorCoder::MajorColor expectedMajor,
     TelCoColorCoder::MinorColor expectedMinor);
@@ -20,6 +15,8 @@ int main() {
 
     testPairToNumber(TelCoColorCoder::BLACK, TelCoColorCoder::ORANGE, 12);
     testPairToNumber(TelCoColorCoder::VIOLET, TelCoColorCoder::SLATE, 25);
+
+    TelCoColorCoder::PrintColorManual();
 
     return 0;
 }
