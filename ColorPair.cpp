@@ -10,9 +10,9 @@ namespace TelCoColorCoder
       "Blue", "Orange", "Green", "Brown", "Slate"
     };
 
-    const int numberOfMajorColors =
+    int numberOfMajorColors =
         sizeof(MajorColorNames) / sizeof(MajorColorNames[0]);
-    const int numberOfMinorColors =
+    int numberOfMinorColors =
         sizeof(MinorColorNames) / sizeof(MinorColorNames[0]);
 
     ColorPair::ColorPair(MajorColor major, MinorColor minor) :
@@ -46,18 +46,5 @@ namespace TelCoColorCoder
     int GetPairNumberFromColor(MajorColor major, MinorColor minor) 
     {
         return major * numberOfMinorColors + minor + 1;
-    }
-
-    void PrintColorManual()
-    {
-        std::cout << std::endl << "***** Color Manual *****" << std::endl;
-        for (int ii = 1; ii <= numberOfMajorColors * numberOfMinorColors; ii++)
-        {
-            ColorPair clrPair = GetColorFromPairNumber(ii);
-            std::cout.width(15);
-            std::cout << clrPair.ToString();
-            std::cout.width(8);
-            std::cout << ii << std::endl;
-        }
     }
 }
