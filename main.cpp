@@ -1,4 +1,5 @@
 #include "StdAfx.h"
+#pragma warning (disable : 4091)
 
 namespace TelCoColorCoder
 {
