@@ -41,11 +41,3 @@ void testColorManual(int expectedNumRows)
     std::cout << "Expected Number of rows match " << std::endl;
     std::cout << "No duplication in either color-Numbers or color-pairs " << std::endl;
 }
-
-void testColorManualPrint()
-{
-
-}
-
-
-

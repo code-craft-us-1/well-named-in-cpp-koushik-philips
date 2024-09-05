@@ -34,7 +34,6 @@ namespace TelCoColorCoder
     void PrintColorManual(Map colorManual)
     {        
         std::cout << std::endl << "***** Color Manual *****" << std::endl;
-        static int previous = 0;
         for (const auto& item : colorManual)
         {
             std::cout << std::setw(15) << item.second << std::setw(8) <<  item.first << std::endl;
