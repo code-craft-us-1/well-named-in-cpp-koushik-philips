@@ -1,4 +1,12 @@
 #include "ColorPair.h"
+#include "ColorUtility.h"
+#include <set>
+
+namespace TelCoColorCoder
+{
+    extern int numberOfMajorColors;
+    extern int numberOfMinorColors;
+}
 
 void testNumberToPair(int pairNumber,
     TelCoColorCoder::MajorColor expectedMajor,
@@ -20,16 +28,24 @@ void testPairToNumber(
     assert(pairNumber == expectedPairNumber);
 }
 
-void testPrintColorManual()
+void testColorManual(int expectedNumRows)
 {
-    std::cout << std::endl << "***** Color Manual *****" << std::endl;
-    for (int ii = 1; ii <= TelCoColorCoder::numberOfMajorColors * TelCoColorCoder::numberOfMinorColors; ii++)
+    auto colorManual = TelCoColorCoder::GetColorManual(); 
+    assert(colorManual.size() == expectedNumRows); // color-Numbers are unique (no duplication)
+    std::set<std::string> colors;
+    for (const auto& item : colorManual)
     {
-        TelCoColorCoder::ColorPair clrPair = TelCoColorCoder::GetColorFromPairNumber(ii);
-        std::cout.width(15);
-        std::cout << clrPair.ToString();
-        std::cout.width(8);
-        std::cout << ii << std::endl;
+        colors.insert(item.second);
     }
+    assert(colors.size() == expectedNumRows); // color-pairs are unique (no duplication)
+    std::cout << "Expected Number of rows match " << std::endl;
+    std::cout << "No duplication in either color-Numbers or color-pairs " << std::endl;
 }
+
+void testColorManualPrint()
+{
+
+}
+
+
 

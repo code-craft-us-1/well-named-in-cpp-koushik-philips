@@ -4,9 +4,6 @@
 
 namespace TelCoColorCoder
 {
-    extern int numberOfMajorColors;
-    extern int numberOfMinorColors;
-
     class ColorPair
     {
     private:
@@ -18,7 +15,4 @@ namespace TelCoColorCoder
         MinorColor getMinor();
         std::string ToString();
     };
-
-    ColorPair GetColorFromPairNumber(int pairNumber);
-    int GetPairNumberFromColor(MajorColor major, MinorColor minor);
 }

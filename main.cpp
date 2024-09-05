@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "ColorPair.h"
+#include "ColorUtility.h"
 
 extern void testNumberToPair(int pairNumber,
     TelCoColorCoder::MajorColor expectedMajor,
@@ -8,7 +9,7 @@ extern void testPairToNumber(
     TelCoColorCoder::MajorColor major,
     TelCoColorCoder::MinorColor minor,
     int expectedPairNumber);
-extern void testPrintColorManual();
+extern void testColorManual(int expectedNumRows);
 
 int main() {
     testNumberToPair(4, TelCoColorCoder::WHITE, TelCoColorCoder::BROWN);
@@ -17,7 +18,8 @@ int main() {
     testPairToNumber(TelCoColorCoder::BLACK, TelCoColorCoder::ORANGE, 12);
     testPairToNumber(TelCoColorCoder::VIOLET, TelCoColorCoder::SLATE, 25);
 
-    testPrintColorManual();
+    TelCoColorCoder::PrintColorManual(TelCoColorCoder::GetColorManual());
+    testColorManual(25);
 
     return 0;
 }
