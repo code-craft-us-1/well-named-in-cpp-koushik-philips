@@ -1,15 +1,10 @@
 #include "ColorPair.h"
 #include "ColorUtility.h"
 #include <set>
+#include <sstream>
 
-namespace TelCoColorCoder
-{
-    extern int numberOfMajorColors;
-    extern int numberOfMinorColors;
-}
-
-void testNumberToPair(int pairNumber,
-    TelCoColorCoder::MajorColor expectedMajor,
+void testNumberToPair(int pairNumber, 
+    TelCoColorCoder::MajorColor expectedMajor, 
     TelCoColorCoder::MinorColor expectedMinor)
 {
     TelCoColorCoder::ColorPair colorPair = TelCoColorCoder::GetColorFromPairNumber(pairNumber);
@@ -18,26 +13,37 @@ void testNumberToPair(int pairNumber,
     assert(colorPair.getMinor() == expectedMinor);
 }
 
-void testPairToNumber(
-    TelCoColorCoder::MajorColor major,
-    TelCoColorCoder::MinorColor minor,
-    int expectedPairNumber)
+void testPairToNumber(TelCoColorCoder::MajorColor major,
+                      TelCoColorCoder::MinorColor minor, int expectedPairNumber)
 {
     int pairNumber = TelCoColorCoder::GetPairNumberFromColor(major, minor);
     std::cout << "Got pair number " << pairNumber << std::endl;
     assert(pairNumber == expectedPairNumber);
 }
 
-void testColorManual(int expectedNumRows)
+void testPrintColorManual(int expectedNumRows)
 {
-    auto colorManual = TelCoColorCoder::GetColorManual(); 
-    assert(colorManual.size() == expectedNumRows); // color-Numbers are unique (no duplication)
-    std::set<std::string> colors;
-    for (const auto& item : colorManual)
+    std::stringstream ss;
+    TelCoColorCoder::PrintColorManual(ss);
+
+    std::string strLine, strMajorColor, strMinorColor;
+    int numCurrColorPair = 0, numPrevColorPair = 0, countRows = 0;
+    std::set<std::string> setColorPair;
+    std::set<int> setColorNumber;
+    while (std::getline(ss, strLine, '\n'))
     {
-        colors.insert(item.second);
+        std::istringstream inputStream(strLine);
+        inputStream >> strMajorColor >> strMinorColor >> numCurrColorPair;
+        std::string colorPairStr = strMajorColor + " " + strMinorColor;
+        numPrevColorPair = (numPrevColorPair < numCurrColorPair) ? numCurrColorPair : 0;
+        setColorPair.insert(colorPairStr);
+        setColorNumber.insert(numCurrColorPair);
+        countRows++;
     }
-    assert(colors.size() == expectedNumRows); // color-pairs are unique (no duplication)
-    std::cout << "Expected Number of rows match " << std::endl;
-    std::cout << "No duplication in either color-Numbers or color-pairs " << std::endl;
+    assert(countRows == expectedNumRows);
+    std::cout << "Prints " << expectedNumRows << " rows" << std::endl;
+    assert((setColorPair.size() == expectedNumRows) && (setColorNumber.size() == expectedNumRows));
+    std::cout << "No Color-pair duplicates, No Color-numbering duplicates" << std::endl;
+    assert(numPrevColorPair != 0);
+    std::cout << "Colors printed in sequence" << std::endl;
 }

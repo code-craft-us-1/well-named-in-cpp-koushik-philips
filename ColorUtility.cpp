@@ -20,23 +20,13 @@ namespace TelCoColorCoder
         return major * numberOfMinorColors + minor + 1;
     }
 
-    Map GetColorManual()
-    {
-        Map colorManual;
+    void PrintColorManual(std::ostream& out)
+    {        
+        std::cout << std::endl << "***** Color Manual *****" << std::endl;
         for (int ii = 1; ii <= TelCoColorCoder::numberOfMajorColors * TelCoColorCoder::numberOfMinorColors; ii++)
         {
             ColorPair clrPair = GetColorFromPairNumber(ii);
-            colorManual.emplace(std::make_pair(ii, clrPair.ToString()));
-        }
-        return colorManual;
-    }
-
-    void PrintColorManual(Map colorManual)
-    {        
-        std::cout << std::endl << "***** Color Manual *****" << std::endl;
-        for (const auto& item : colorManual)
-        {
-            std::cout << std::setw(15) << item.second << std::setw(8) <<  item.first << std::endl;
+            out << std::setw(15) << clrPair.ToString() << std::setw(8) << ii << std::endl;
         }
         std::cout << std::endl;
     }
